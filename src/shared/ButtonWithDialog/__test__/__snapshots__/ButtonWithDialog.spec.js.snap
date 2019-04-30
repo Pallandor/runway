@@ -1,19 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ButtonWithDialog renders correctly with defaults 1`] = `
-<div>
+.emotion-0 {
+  position: relative;
+}
+
+<div
+  className="emotion-0"
+>
   <Button
     Icon={null}
     buttonLabel=""
     closeAriaLabel=""
     contentPadding="0 16px"
     dialogStyles={Object {}}
+    hasDialogDimensions={false}
+    iconLabelButtonValue={null}
+    lockBgScroll={false}
     onBlur={[Function]}
     onClick={[Function]}
     onClose={[Function]}
     open={false}
     placeHolder=""
     renderButtonValue={[Function]}
+    renderFooter={[Function]}
     setButtonRef={[Function]}
     transitionStyles={
       Object {
@@ -23,40 +33,38 @@ exports[`ButtonWithDialog renders correctly with defaults 1`] = `
       }
     }
   />
-  <Transition
-    appear={false}
-    enter={true}
-    exit={true}
-    in={false}
-    mountOnEnter={false}
-    onEnter={[Function]}
-    onEntered={[Function]}
-    onEntering={[Function]}
-    onExit={[Function]}
-    onExited={[Function]}
-    onExiting={[Function]}
-    timeout={300}
-    unmountOnExit={true}
+  <MediaQueryDetector
+    query="@media only screen and (min-width: 480px)"
   >
     <Component />
-  </Transition>
+  </MediaQueryDetector>
 </div>
 `;
 
 exports[`ButtonWithDialog renders correctly with one child element 1`] = `
-<div>
+.emotion-0 {
+  position: relative;
+}
+
+<div
+  className="emotion-0"
+>
   <Button
     Icon={null}
     buttonLabel=""
     closeAriaLabel=""
     contentPadding="0 16px"
     dialogStyles={Object {}}
+    hasDialogDimensions={false}
+    iconLabelButtonValue={null}
+    lockBgScroll={false}
     onBlur={[Function]}
     onClick={[Function]}
     onClose={[Function]}
     open={true}
     placeHolder=""
     renderButtonValue={[Function]}
+    renderFooter={[Function]}
     setButtonRef={[Function]}
     transitionStyles={
       Object {
@@ -66,27 +74,19 @@ exports[`ButtonWithDialog renders correctly with one child element 1`] = `
       }
     }
   />
-  <Transition
-    appear={false}
-    enter={true}
-    exit={true}
-    in={true}
-    mountOnEnter={false}
-    onEnter={[Function]}
-    onEntered={[Function]}
-    onEntering={[Function]}
-    onExit={[Function]}
-    onExited={[Function]}
-    onExiting={[Function]}
-    timeout={300}
-    unmountOnExit={true}
+  <MediaQueryDetector
+    query="@media only screen and (min-width: 480px)"
   >
     <Component />
-  </Transition>
+  </MediaQueryDetector>
 </div>
 `;
 
 exports[`ButtonWithDialog renders correctly with one child function 1`] = `
+.emotion-3 {
+  position: relative;
+}
+
 .emotion-2 {
   position: relative;
   height: 6rem;
@@ -131,9 +131,12 @@ exports[`ButtonWithDialog renders correctly with one child function 1`] = `
   contentPadding="0 16px"
   dialogAriaLabel=""
   dialogStyles={Object {}}
+  hasDialogDimensions={false}
+  lockBgScroll={false}
   onBlur={[Function]}
   onClose={[Function]}
   renderButtonValue={[Function]}
+  renderFooter={[Function]}
   renderHeader={[Function]}
   transitionStyles={
     Object {
@@ -143,19 +146,25 @@ exports[`ButtonWithDialog renders correctly with one child function 1`] = `
     }
   }
 >
-  <div>
+  <div
+    className="emotion-3"
+  >
     <Button
       Icon={null}
       buttonLabel=""
       closeAriaLabel=""
       contentPadding="0 16px"
       dialogStyles={Object {}}
+      hasDialogDimensions={false}
+      iconLabelButtonValue={null}
+      lockBgScroll={false}
       onBlur={[Function]}
       onClick={[Function]}
       onClose={[Function]}
       open={false}
       placeHolder=""
       renderButtonValue={[Function]}
+      renderFooter={[Function]}
       setButtonRef={[Function]}
       transitionStyles={
         Object {
@@ -185,39 +194,53 @@ exports[`ButtonWithDialog renders correctly with one child function 1`] = `
         </div>
       </button>
     </Button>
-    <Transition
-      appear={false}
-      enter={true}
-      exit={true}
-      in={false}
-      mountOnEnter={false}
-      onEnter={[Function]}
-      onEntered={[Function]}
-      onEntering={[Function]}
-      onExit={[Function]}
-      onExited={[Function]}
-      onExiting={[Function]}
-      timeout={300}
-      unmountOnExit={true}
-    />
+    <MediaQueryDetector
+      query="@media only screen and (min-width: 480px)"
+    >
+      <Transition
+        appear={false}
+        enter={true}
+        exit={true}
+        in={false}
+        mountOnEnter={false}
+        onEnter={[Function]}
+        onEntered={[Function]}
+        onEntering={[Function]}
+        onExit={[Function]}
+        onExited={[Function]}
+        onExiting={[Function]}
+        timeout={300}
+        unmountOnExit={true}
+      />
+    </MediaQueryDetector>
   </div>
 </ButtonWithDialog>
 `;
 
 exports[`ButtonWithDialog renders correctly with props 1`] = `
-<div>
+.emotion-0 {
+  position: relative;
+}
+
+<div
+  className="emotion-0"
+>
   <Button
     Icon={null}
     buttonLabel=""
     closeAriaLabel=""
     contentPadding="0 16px"
     dialogStyles={Object {}}
+    hasDialogDimensions={false}
+    iconLabelButtonValue={null}
+    lockBgScroll={false}
     onBlur={[Function]}
     onClick={[Function]}
     onClose={[Function]}
     open={false}
     placeHolder=""
     renderButtonValue={[Function]}
+    renderFooter={[Function]}
     setButtonRef={[Function]}
     transitionStyles={
       Object {
@@ -227,22 +250,10 @@ exports[`ButtonWithDialog renders correctly with props 1`] = `
       }
     }
   />
-  <Transition
-    appear={false}
-    enter={true}
-    exit={true}
-    in={false}
-    mountOnEnter={false}
-    onEnter={[Function]}
-    onEntered={[Function]}
-    onEntering={[Function]}
-    onExit={[Function]}
-    onExited={[Function]}
-    onExiting={[Function]}
-    timeout={300}
-    unmountOnExit={true}
+  <MediaQueryDetector
+    query="@media only screen and (min-width: 480px)"
   >
     <Component />
-  </Transition>
+  </MediaQueryDetector>
 </div>
 `;

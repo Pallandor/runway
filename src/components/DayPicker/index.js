@@ -93,6 +93,7 @@ class DayPicker extends Component {
 
     return (
       <ButtonWithDialog
+        lockBgScroll
         buttonLabel={label}
         placeHolder={placeHolder}
         Icon={IconCalendar}
