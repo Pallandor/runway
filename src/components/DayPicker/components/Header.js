@@ -7,7 +7,24 @@ import CrossIcon from '../../../icons/CrossIcon';
 
 const ICON_SIZE = '32px';
 
-function Header({ closeDialog, closeAriaLabel, headerLabel, HeaderIcon }) {
+const weekdayStyles = {
+  width: '100%',
+  padding: '8px 0',
+  fontFamily: fontFamily.body,
+  fontSize: '0.875rem',
+  lineHeight: '0.875rem',
+  textAlign: 'center',
+  background: colours.disabledGrey,
+  boxShadow: '0 1px 1px 0 rgba(0, 0, 0, 0.08), 0 0 1px 0 rgba(0, 0, 0, 0.04)'
+};
+
+function Header({
+  closeDialog,
+  closeAriaLabel,
+  headerLabel,
+  dayLabels,
+  rowStyles
+}) {
   return (
     <div css={{ zIndex: 1 }}>
       <div
@@ -21,13 +38,6 @@ function Header({ closeDialog, closeAriaLabel, headerLabel, HeaderIcon }) {
           padding: '0 0 0 12px'
         }}
       >
-        {HeaderIcon && (
-          <HeaderIcon
-            height={ICON_SIZE}
-            width={ICON_SIZE}
-            css={{ fill: colours.white, marginRight: '8px' }}
-          />
-        )}
         <span
           css={{
             flex: 1,
@@ -42,7 +52,7 @@ function Header({ closeDialog, closeAriaLabel, headerLabel, HeaderIcon }) {
           type="button"
           css={{
             background: 'none',
-            height: `65px`,
+            height: '48px',
             padding: 0,
             lineHeight: 0,
             border: 'none',
@@ -57,6 +67,28 @@ function Header({ closeDialog, closeAriaLabel, headerLabel, HeaderIcon }) {
           />
         </button>
       </div>
+      <div css={{ ...rowStyles, ...weekdayStyles }}>
+        {dayLabels.map(day => (
+          <div
+            key={day}
+            css={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                right: '-1px',
+                height: '15px',
+                borderLeft: '1px solid #eeeeee'
+              }
+            }}
+          >
+            {day}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -65,13 +97,13 @@ Header.propTypes = {
   closeDialog: PropTypes.func.isRequired,
   closeAriaLabel: PropTypes.string,
   headerLabel: PropTypes.string,
-  HeaderIcon: PropTypes.func
+  dayLabels: PropTypes.arrayOf(PropTypes.string).isRequired,
+  rowStyles: PropTypes.shape().isRequired
 };
 
 Header.defaultProps = {
   closeAriaLabel: '',
-  headerLabel: '',
-  HeaderIcon: null
+  headerLabel: ''
 };
 
 export default Header;
