@@ -18,7 +18,9 @@ function Header({ closeDialog, closeAriaLabel, headerLabel, HeaderIcon }) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '0 0 0 12px'
+          // padding: '0 0 0 12px' // TODO: ROGER changed
+          padding: '0 0 0 15px' // TODO: ROGER added. Design says 15px but consistent with header is 12px
+          // settle on one
         }}
       >
         {HeaderIcon && (

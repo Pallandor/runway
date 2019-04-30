@@ -1,3 +1,68 @@
+### Roger Single Test
+
+```js
+<div>
+      <PopupField
+      placeHolder="Where to?"
+      buttonLabel="Where"
+      Icon={PinIcon}
+      HeaderIcon={PinIcon}
+      headerLabel="Popup Field"
+      dialogDimensions={{ height: '220px', width: '320px' }}
+    >
+      <div>Content of the popup</div>
+    </PopupField>
+    <div style={{ display: 'flex', flexDirection: 'row' }}>
+      <div style={{ flex: 1 }}>
+        <PopupField
+          placeHolder="Where to?"
+          buttonLabel="Where"
+          Icon={PinIcon}
+          HeaderIcon={PinIcon}
+          headerLabel="Popup Field"
+          dialogDimensions={{ height: '220px', width: '320px' }}
+          iconLabelButtonValue={{ icon: PersonIcon, label: '12 Passengers' }}
+        >
+          <div>Content of the popup</div>
+        </PopupField>
+      </div>
+    </div>
+</div>
+
+```
+
+```js
+<div style={{ display: 'flex', flexDirection: 'row' }}>
+  <div style={{ flex: 1 }}>
+    <PopupField
+      placeHolder="Where to?"
+      buttonLabel="Where"
+      Icon={PinIcon}
+      HeaderIcon={PinIcon}
+      headerLabel="Popup Field"
+      dialogDimensions={{ height: '220px', width: '320px' }}
+      iconLabelButtonValue={{ icon: PinIcon, label: '12 Passengers' }}
+    >
+      <div>Content of the popup</div>
+    </PopupField>
+  </div>
+  <div style={{ flex: 1 }}>
+    <PopupField
+      placeHolder="Where to?"
+      buttonLabel="Where"
+      Icon={PinIcon}
+      HeaderIcon={PinIcon}
+      headerLabel="Popup Field"
+      dialogDimensions={{ height: '220px', width: '320px' }}
+    >
+      <div>Content of the popup</div>
+    </PopupField>
+  </div>
+</div>
+
+```
+
+
 ### Value not selected
 
 Optional placeholder and icon will be displayed if provided

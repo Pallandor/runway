@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import noop from '../../utils/noop';
+import { mq } from '../../theme/airways';
 
 import ButtonWithDialog, {
   transitionStylesSlideUp,
@@ -10,6 +11,7 @@ import ButtonWithDialog, {
 } from '../../shared/ButtonWithDialog';
 
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 class PopupField extends Component {
   renderButtonValue = () => {
@@ -36,6 +38,64 @@ class PopupField extends Component {
     );
   };
 
+
+  /*
+    <PopupField
+       onFooterAction={closeDialog => { 
+         // do things
+         // can close too
+       }}
+    />
+  */
+  // TODO: ROGER added - working on this bit now
+  renderFooter = ({ closeDialog, onFooterAction }) => {
+    // TODO: support
+      // label e.g. 1 adult or stacked ontop each other '2 passengers /n 1 adult 1 child
+      // action button e.g. Confirm (can hand op and then close (dont think it does anythign other than this))
+    const { closeAriaLabel, footerLabelPrimary, footerLabelSecondary } = this.props;
+
+    // or just labels={{ main: '1 Adult' }}
+    return (
+      <Footer
+        primaryLabel="2 Passengers"
+        secondaryLabel="1 Adult, 1 Infant, 1 Child"
+        actionText="Confirm"
+        onAction={() => onFooterAction(closeDialog)}
+        closeAriaLabel={closeAriaLabel}
+      />
+
+      // <Header
+      //   closeDialog={closeDialog}
+      //   headerLabel={headerLabel}
+      //   HeaderIcon={HeaderIcon}
+      //   closeAriaLabel={closeAriaLabel}
+      // />
+    );
+  };
+
+  // TODO: ROGER added
+  hasDialogDimensions = () => {
+    const { dialogDimensions } = this.props;
+    return (
+      dialogDimensions && dialogDimensions.height && dialogDimensions.width
+    );
+  };
+
+  // TODO: ROGER added
+  buildDialogStyles = () => {
+    const { dialogDimensions } = this.props;
+    return {
+      ...dialogStylesFullScreen,
+      ...(this.hasDialogDimensions() && {
+        [mq.tablet]: {
+          position: 'absolute',
+          height: dialogDimensions.height,
+          width: dialogDimensions.width
+        }
+      })
+    };
+  };
+
   render() {
     const {
       children,
@@ -45,9 +105,12 @@ class PopupField extends Component {
       closeAriaLabel,
       dialogAriaLabel,
       placeHolder,
-      Icon
+      Icon,
+      iconLabelButtonValue,
+      // TODO: ROGER added
+      disableHeader, // so opt out. fine for now
+      disableFooter
     } = this.props;
-
     return (
       <ButtonWithDialog
         onBlur={onBlur}
@@ -57,9 +120,12 @@ class PopupField extends Component {
         closeAriaLabel={closeAriaLabel}
         dialogAriaLabel={dialogAriaLabel}
         Icon={Icon}
-        renderHeader={this.renderHeader}
+        renderHeader={disableHeader ? noop : this.renderHeader}
+        renderFooter={disableFooter ? noop : this.renderFooter}
         renderButtonValue={this.renderButtonValue}
-        dialogStyles={dialogStylesFullScreen}
+        iconLabelButtonValue={iconLabelButtonValue}
+        dialogStyles={this.buildDialogStyles()}
+        hasDialogDimensions={this.hasDialogDimensions()}
         transitionStyles={transitionStylesSlideUp}
       >
         {children}
@@ -85,6 +151,11 @@ PopupField.propTypes = {
   closeAriaLabel: PropTypes.string,
   /** Aria label for the dialog once opened */
   dialogAriaLabel: PropTypes.string,
+  /** Custom dimensions to apply to dialog when viewing on a non-mobile device */
+  dialogDimensions: PropTypes.shape({
+    height: PropTypes.string,
+    width: PropTypes.string
+  }),
   /** Placeholder to be displayed if no large or small values are provided */
   placeHolder: PropTypes.string,
   /** Icon displayed in the field button */
@@ -92,7 +163,13 @@ PopupField.propTypes = {
   /** Label displayed in the dialog header */
   headerLabel: PropTypes.string,
   /** Icon displayed in the dialog header */
-  HeaderIcon: PropTypes.func
+  HeaderIcon: PropTypes.func,
+  /** Custom Label and Icon for the field button. When provided, this signals to
+   * PopupField to render special icon/label pairing layout for the button */
+  iconLabelButtonValue: PropTypes.shape({
+    icon: PropTypes.any,
+    label: PropTypes.string
+  })
 };
 
 PopupField.defaultProps = {
@@ -107,7 +184,9 @@ PopupField.defaultProps = {
   placeHolder: '',
   Icon: null,
   headerLabel: '',
-  HeaderIcon: null
+  HeaderIcon: null,
+  dialogDimensions: null,
+  iconLabelButtonValue: null
 };
 
 export default PopupField;

@@ -88,6 +88,12 @@ class ButtonWithDialog extends Component {
       setFocusElementRef: this.focusElementRef
     });
 
+  renderFooter = () =>
+    this.props.renderFooter({
+      closeDialog: this.closeDialog,
+      setFocusElementRef: this.focusElementRef
+    });
+
   renderButton = () => {
     const { open } = this.state;
     const {
@@ -113,7 +119,8 @@ class ButtonWithDialog extends Component {
       dialogAriaLabel,
       dialogStyles,
       transitionStyles,
-      contentPadding
+      contentPadding,
+      hasDialogDimensions // TODO: ROGER added
     } = this.props;
 
     const { open } = this.state;
@@ -128,6 +135,11 @@ class ButtonWithDialog extends Component {
 
     return (
       <div
+        css={{
+          ...(hasDialogDimensions && {
+            position: 'relative'
+          })
+        }}
         ref={el => {
           this.wrapper = el;
         }}
@@ -150,9 +162,10 @@ class ButtonWithDialog extends Component {
               }}
             >
               {this.renderHeader()}
-              <div css={{ overflow: 'auto', padding: contentPadding }}>
+              <div css={{ flex: 1, overflow: 'auto', padding: contentPadding }}>
                 {content}
               </div>
+              {this.renderFooter()}
             </div>
           )}
         </Transition>
@@ -167,6 +180,7 @@ ButtonWithDialog.propTypes = {
   onClose: PropTypes.func,
   onBlur: PropTypes.func,
   renderHeader: PropTypes.func,
+  renderFooter: PropTypes.func,
   closeAriaLabel: PropTypes.string,
   dialogAriaLabel: PropTypes.string,
   dialogStyles: PropTypes.shape().isRequired,
@@ -183,6 +197,7 @@ ButtonWithDialog.defaultProps = {
   onClose: noop,
   onBlur: noop,
   renderHeader: noop,
+  renderFooter: noop,
   closeAriaLabel: '',
   dialogAriaLabel: '',
   contentPadding: `0 ${layout.gutter}`
