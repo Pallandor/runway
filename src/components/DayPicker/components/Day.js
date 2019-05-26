@@ -143,12 +143,19 @@ class Day extends Component {
   };
 
   shouldComponentUpdate(nextProps, nextState) {
+    const priceUpdated =
+      (this.props.price &&
+        nextProps.price &&
+        this.props.price.value !== nextProps.price.value) ||
+      ((this.props.price && !nextProps.price) ||
+        (!this.props.price && nextProps.price));
     if (
       nextState.hover !== this.state.hover ||
       nextProps.isEnd !== this.props.isEnd ||
       nextProps.isStart !== this.props.isStart ||
       nextProps.isInRange !== this.props.isInRange ||
-      nextProps.isLoadingPrice !== this.props.isLoadingPrice
+      nextProps.isLoadingPrice !== this.props.isLoadingPrice ||
+      priceUpdated // roger added
     ) {
       return true;
     }
@@ -318,12 +325,14 @@ class Day extends Component {
       >
         <div css={dateStyles({ isToday, isDisabled })}>{dayOfMonth}</div>
         {(isLoadingPrice || price) && (
-          <Price
-            {...price}
-            currencySymbol={currencySymbol}
-            isDesktopDevice={isDesktopDevice}
-            isLoadingPrice={isLoadingPrice}
-          />
+          <React.Fragment>
+            <Price
+              {...price}
+              currencySymbol={currencySymbol}
+              isDesktopDevice={isDesktopDevice}
+              isLoadingPrice={isLoadingPrice}
+            />
+          </React.Fragment>
         )}
         {isStart && (
           <DayLabel isSelected label={startSelectedLabel} Icon={Icon} />

@@ -22,6 +22,7 @@ const monthStyles = {
 };
 
 class Month extends PureComponent {
+
   renderMonthCaption = (monthLabel, year) => (
     <div
       css={{
@@ -72,7 +73,6 @@ class Month extends PureComponent {
 
     const monthLabel = monthLabels[month.getMonth()];
     const year = month.getFullYear();
-
     return (
       <div style={style} role="rowgroup" css={monthStyles}>
         {this.renderMonthCaption(monthLabel, year)}

@@ -34,24 +34,15 @@ const outPrice = keyframes`
   transform: translate3d(4px,0,0);
 }`;
 
-const enterPrice = keyframes`
-0% {
-  opacity: 0;
-  transform: translate3d(4px,0,0);
-}
-100% {
-  opacity: 1;
-  transform: translate3d(0,0,0);
-}`;
-
-function Price({
-  isLoadingPrice,
-  value,
-  taxValue,
-  currencySymbol,
-  isLowestPrice,
-  isDesktopDevice
-}) {
+function Price(props) {
+  const {
+    isLoadingPrice,
+    value,
+    taxValue,
+    currencySymbol,
+    isLowestPrice,
+    isDesktopDevice
+  } = props;
   return (
     <div
       css={{
@@ -80,7 +71,7 @@ function Price({
             top: '2px',
             height: '7px',
             margin: '0 auto',
-            animation: `${loadingPrice} 2s linear infinite`,
+            animation: `${loadingPrice} 2s linear infinite`, // roger 1
             background:
               'linear-gradient(to right,rgba(0,0,0,0.06) 20%,rgba(0,0,0,0.01) 70%,rgba(0,0,0,0.05) 100%)',
             bottom: '1px',
@@ -102,7 +93,6 @@ function Price({
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            animation: `${enterPrice} 250ms cubic-bezier(0.4, 0.0, 0.2, 1)`,
             [mq.medium]: {
               flexDirection: 'row',
               alignItems: 'center'

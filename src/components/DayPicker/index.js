@@ -51,28 +51,30 @@ class DayPicker extends Component {
   constructor(props) {
     super(props);
 
-    const { disabledAfter, monthsToShow } = props;
+    const { disabledAfterISO, monthsToShow } = props;
     const today = new Date().setHours(0, 0, 0, 0);
 
     this.state = {
       today,
-      disabledAfter: getDateWithoutTime(disabledAfter),
+      disabledAfter: getDateWithoutTime(disabledAfterISO),
       months: getMonthsArray(today, monthsToShow),
       isSelectingStartDate: true,
       showFooters: false
     };
   }
 
-  static getDerivedStateFromProps({ startDate, endDate, disabledBefore }) {
+  static getDerivedStateFromProps({ startDate, endDate }) {
     return {
       startDate: getDateWithoutTime(startDate),
-      endDate: getDateWithoutTime(endDate),
-      disabledBefore: getDateWithoutTime(disabledBefore)
+      endDate: getDateWithoutTime(endDate)
     };
   }
 
+  getDisabledBefore = () => getDateWithoutTime(this.props.disabledBeforeISO)
+  
   onOpen = () => {
-    const { today, startDate, disabledBefore } = this.state;
+    const { today, startDate } = this.state;
+    const disabledBefore = this.getDisabledBefore();
     const { date, month } = getInitialDateToFocus(
       today,
       startDate,
@@ -191,10 +193,11 @@ class DayPicker extends Component {
       today,
       startDate,
       endDate,
-      disabledBefore,
       disabledAfter,
       isSelectingStartDate
     } = this.state;
+
+    const disabledBefore = this.getDisabledBefore();
 
     const month = months[index];
 
@@ -242,11 +245,9 @@ class DayPicker extends Component {
   };
 
   setupOnMonthsShownSubscription = () => {
-    const {
-      configOnMonthsShownSubscription,
-      disabledBefore,
-      disabledAfter
-    } = this.props;
+    const { configOnMonthsShownSubscription } = this.props;
+    const { disabledAfter } = this.state;
+    const disabledBefore = this.getDisabledBefore();
     if (configOnMonthsShownSubscription) {
       const { onlyEnableds, onMonthsShown } = configOnMonthsShownSubscription;
       if (onMonthsShown) {
@@ -359,10 +360,10 @@ DayPicker.propTypes = {
   startDate: PropTypes.instanceOf(Date),
   /** End date if selected */
   endDate: PropTypes.instanceOf(Date),
-  /** Disable all days before this date */
-  disabledBefore: PropTypes.instanceOf(Date),
-  /** Disable all days after this date */
-  disabledAfter: PropTypes.instanceOf(Date),
+  /** Disable all days before this ISO date string */
+  disabledBeforeISO: PropTypes.string,
+  /** Disable all days after this ISO date string */
+  disabledAfterISO: PropTypes.string,
   /**
    * Triggered when any day is clicked
    *
@@ -428,8 +429,8 @@ DayPicker.propTypes = {
 DayPicker.defaultProps = {
   startDate: null,
   endDate: null,
-  disabledBefore: null,
-  disabledAfter: null,
+  disabledBeforeISO: null,
+  disabledAfterISO: null,
   isDateRange: true,
   onDayClick: noop,
   firstDayOfWeek: 0,
